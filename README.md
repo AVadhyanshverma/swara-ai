@@ -1,4 +1,4 @@
-# Swara AI - Advanced Agentic Workflow Framework
+# Swara - Unlocking Student Potential
 
 ![Swara UI 1](.screenshorts/screenshot_9_v2.png)
 ![Swara UI 2](.screenshorts/img2_v2.png)
