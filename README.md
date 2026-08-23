@@ -1,6 +1,8 @@
 # Swara AI - Advanced Agentic Workflow Framework
 
-![Swara AI Banner](ui/static/img/bg.jpeg)
+![Swara UI 1](.screenshorts/screenshot_1.png)
+![Swara UI 2](.screenshorts/screenshot_3.png)
+![Swara UI 3](.screenshorts/screenshot_5.png)
 
 ## Overview
 Swara AI is an advanced, autonomous AI agent framework designed to bridge the gap between Large Language Models (LLMs) and local machine execution. Built with **FastAPI**, **LangGraph concepts**, and a highly modular tool ecosystem, Swara AI acts as a sophisticated digital assistant capable of reading files, writing code, executing scripts, solving math, creating interactive mindmaps, and managing its own memory securely.
