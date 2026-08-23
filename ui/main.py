@@ -639,10 +639,20 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # Open in the user's native system web browser
+
+    # Open in the user's native system web browser
     import webbrowser
     url = f'http://127.0.0.1:{APP_PORT}/?q=high'
-    print(f"\n🚀 SWARA is running! Opening in your default web browser: {url}\n")
+    
+    print("=" * 60)
+    print("  🟢 SERVER STATUS: ONLINE")
+    print(f"  🌐 LOCAL URL:     {url}")
+    print("  💡 HINT:          Press CTRL+C to shutdown the server")
+    print("=" * 60)
+    print("\n🚀 Launching interface in your default web browser...\n")
+    
     webbrowser.open(url)
+
 
     # Keep the main thread alive so the server doesn't die
     try:
