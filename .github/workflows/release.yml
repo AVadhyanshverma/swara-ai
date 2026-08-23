@@ -38,12 +38,33 @@ jobs:
         pyinstaller build.spec
       shell: bash
 
-    - name: Rename artifacts
+    - name: Package artifacts
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           mv dist/SwaraAI.exe dist/SwaraAI-Windows.exe
         else
-          mv dist/swara-ai dist/swara-ai-linux
+          mkdir -p AppDir/usr/bin
+          cp dist/swara-ai AppDir/usr/bin/swara-ai
+          cat << 'EOF' > AppDir/AppRun
+          #!/bin/sh
+          HERE="$(dirname "$(readlink -f "${0}")")"
+          exec "$HERE/usr/bin/swara-ai" "$@"
+          EOF
+          chmod +x AppDir/AppRun
+          cat << 'EOF' > AppDir/swara-ai.desktop
+          [Desktop Entry]
+          Name=SwaraAI
+          Exec=swara-ai
+          Icon=swara-ai
+          Type=Application
+          Categories=Utility;
+          EOF
+          touch AppDir/swara-ai.svg
+          wget -q https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
+          chmod +x appimagetool-x86_64.AppImage
+          ./appimagetool-x86_64.AppImage --appimage-extract-and-run AppDir SwaraAI-Linux.AppImage
+          mv SwaraAI-Linux.AppImage dist/
+          rm -f dist/swara-ai
         fi
       shell: bash
 
