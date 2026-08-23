@@ -13,6 +13,7 @@ a = Analysis(
         ('ui/static', 'ui/static'),
         ('ui/index.html', 'ui'),
         ('ui/main.py', 'ui'),
+        ('ui_story', 'ui_story'),
         ('agent_dir', 'agent_dir'),
         ('tools', 'tools')
     ],
