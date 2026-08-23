@@ -59,7 +59,7 @@ mcp==1.29.0
 mmh3==5.2.1
 multidict==6.7.1
 nest-asyncio==1.6.0
-numpy==2.5.2
+numpy>=2.0.0
 onnxruntime==1.29.0
 openai==3.3.0
 orjson==3.12.0
