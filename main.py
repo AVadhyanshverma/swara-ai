@@ -24,11 +24,10 @@ def run_ui():
     logger.info("Initializing Swara AI Web UI...")
     logger.info("Preparing FastAPI server and local tool endpoints...")
     
-    ui_path = os.path.join(os.path.dirname(__file__), "ui", "main.py")
-    
     try:
-        logger.info(f"Executing UI subprocess: {sys.executable} {ui_path}")
-        subprocess.run([sys.executable, ui_path])
+        logger.info("Starting UI server internally...")
+        import ui.main
+        ui.main.start_ui()
     except KeyboardInterrupt:
         logger.info("Received KeyboardInterrupt. Shutting down UI gracefully.")
     except Exception as e:
