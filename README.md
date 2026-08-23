@@ -1,9 +1,9 @@
 # Swara AI - Advanced Agentic Workflow Framework
 
-![Swara UI 1](.screenshorts/screenshot_9.png)
-![Swara UI 2](.screenshorts/img2.png)
-![Swara UI 3](.screenshorts/img3.png)
-![Swara UI 4](.screenshorts/img4.png)
+![Swara UI 1](.screenshorts/screenshot_9_v2.png)
+![Swara UI 2](.screenshorts/img2_v2.png)
+![Swara UI 3](.screenshorts/img3_v2.png)
+![Swara UI 4](.screenshorts/img4_v2.png)
 ![Swara UI 5](.screenshorts/img5.png)
 ![Swara UI 6](.screenshorts/screenshot_1.png)
 ![Swara UI 7](.screenshorts/screenshot_3.png)
