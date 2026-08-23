@@ -38,21 +38,109 @@ Whether you prefer a lightweight **Terminal CLI** or a rich, interactive **Web U
 ## Repository Architecture
 
 ```text
-Reverie/
-├── agent_dir/               # Core LLM orchestration and LangGraph state management
-├── tools/                   # Modular tools for the AI (Memory, Web, Math, Execution)
-│   ├── browser_auto/        # Playwright MCP server for web automation
-│   ├── chat_his/            # Encrypted chat history and SQLCipher logic
-│   ├── memory/              # Vector database and semantic search engine
-│   ├── PyX-Builder/         # Secure execution environment builder
-│   └── interactive_gui_.../ # HTML/JS generators for mindmaps
-├── ui/                      # FastAPI Web Server and Static Assets
-│   ├── static/              # CSS, JS, Manifest, Images
-│   ├── index.html           # Main chat interface
-│   └── main.py              # FastAPI application entry point
-├── chat_cli.py              # Terminal interface entry point
-├── build.spec               # PyInstaller configuration file
-└── .github/workflows/       # CI/CD Pipelines for automated releases
+.
+├── agent_dir
+│   ├── agent.py
+│   ├── __init__.py
+│   ├── model_router.py
+│   ├── prompts
+│   │   ├── chat_prompt.txt
+│   │   ├── code_prompt.txt
+│   │   ├── math_prompt.txt
+│   │   ├── research_prompt.txt
+│   │   └── system_prompt.txt
+│   ├── skills
+│   │   ├── browser_tools.md
+│   │   ├── document_tools.md
+│   │   ├── file_tools.md
+│   │   ├── firecrawl_tools.md
+│   │   ├── memory_tools.md
+│   │   └── python_tools.md
+│   ├── tools
+│   │   ├── browser_tools.py
+│   │   ├── document_tools.py
+│   │   ├── file_tools.py
+│   │   ├── firecrawl_tools.py
+│   │   ├── memory_tools.py
+│   │   ├── mindmap_tool_wrapper.py
+│   │   ├── python_tools.py
+│   │   └── skill_tools.py
+│   └── tools_system.py
+├── build.spec
+├── chat_cli.py
+├── dev_clean_memory.py
+├── installations_instructions
+│   └── pre_setup_fox_linux
+├── main.py
+├── path_manager.py
+├── README.md
+├── tools
+│   ├── browser_auto
+│   │   ├── a.sh
+│   │   ├── browser_cli.py
+│   │   ├── b.sh
+│   │   ├── get_tools.py
+│   │   ├── playwright-mcp-windows.zip
+│   │   ├── report.md
+│   │   └── win-dist
+│   ├── chat_his
+│   │   ├── ARCHITECTURE_REPORT.md
+│   │   ├── deep_scan.py
+│   │   ├── encrypted_chat_engine.py
+│   │   ├── __init__.py
+│   │   ├── process_kimi.py
+│   │   ├── reverie_chats.db
+│   │   ├── search_db2.py
+│   │   └── search_db.py
+│   ├── __init__.py
+│   ├── interactive_gui_or_mindsmaps_and_charts
+│   │   ├── generated_maps
+│   │   ├── index.html
+│   │   ├── markmap-autoloader.js
+│   │   └── mindmap_tool.py
+│   ├── memory
+│   │   ├── __init__.py
+│   │   ├── memory_engine.py
+│   │   ├── report.md
+│   │   └── vector_db
+│   ├── memory_tool
+│   │   └── memory_tool.py
+│   ├── PyX-Builder
+│   │   ├── Cargo.lock
+│   │   ├── Cargo.toml
+│   │   ├── python-embedded-linux.tar.gz
+│   │   ├── python-embedded-windows.tar.gz
+│   │   ├── pyx_linux
+│   │   ├── pyx_windows.exe
+│   │   ├── reproduction_report.md
+│   │   ├── scripts
+│   │   └── src
+│   ├── pyx_executor.py
+│   ├── solve maths arithmetic
+│   │   ├── benchmark.py
+│   │   ├── calculator.py
+│   │   ├── step_calculator.py
+│   │   ├── test_step_calc.py
+│   │   └── tool.py
+│   └── web_tools
+│       ├── firecrawl_tools.py
+│       └── report.md
+├── ui
+│   ├── index.html
+│   ├── main.py
+│   ├── report.md
+│   └── static
+│       ├── css
+│       ├── img
+│       ├── js
+│       └── manifest.json
+└── ui_story
+    ├── index.html
+    └── static
+        ├── app.js
+        └── style.css
+
+27 directories, 74 files
 ```
 
 ## Installation & Setup (For Developers)
