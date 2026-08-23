@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("SwaraLauncher")
 
-BANNER = """
+BANNER = r"""
 ==================================================================
   ___                                   _  _____ 
  / __> _ _ _  ___  _ _  ___     /\     | |<__   >
