@@ -36,8 +36,6 @@ const DOM = {
 let currentThreadId = null;
 let allThreads      = [];
 let isSending       = false;
-let uploadedFileContent = null;
-let uploadedFileName = null;
 
 /* ---- 4. Initialisation ---- */
 function init() {
@@ -73,57 +71,7 @@ function setupListeners() {
     DOM.newChatBtns.forEach(btn => btn.addEventListener('click', createNewThread));
   }
   
-  // File Upload Logic
-  const uploadBtn = document.getElementById('upload-btn');
-  const fileInput = document.getElementById('file-upload-input');
-  const filePill = document.getElementById('file-preview-pill');
-  const fileNameText = document.getElementById('file-name-text');
-  const removeFileBtn = document.getElementById('remove-file-btn');
-  
-  if (uploadBtn && fileInput) {
-    uploadBtn.addEventListener('click', () => fileInput.click());
-    
-    fileInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      
-      // Show loading
-      filePill.style.display = 'flex';
-      fileNameText.textContent = `Uploading ${file.name}...`;
-      
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      try {
-        const res = await fetch('/api/upload', { method: 'POST', body: formData });
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
-        
-        uploadedFileContent = data.content;
-        uploadedFileName = data.filename;
-        fileNameText.textContent = uploadedFileName;
-        if (DOM.sendBtn) DOM.sendBtn.disabled = false;
-      } catch (err) {
-        console.error(err);
-        fileNameText.textContent = `Error: ${err.message}`;
-        setTimeout(() => {
-          if (!uploadedFileContent) filePill.style.display = 'none';
-        }, 3000);
-      }
-      
-      fileInput.value = ''; // Reset input
-    });
-    
-    removeFileBtn.addEventListener('click', () => {
-      uploadedFileContent = null;
-      uploadedFileName = null;
-      filePill.style.display = 'none';
-      if (DOM.chatInput) {
-        DOM.chatInput.focus();
-        if (DOM.sendBtn) DOM.sendBtn.disabled = DOM.chatInput.value.trim() === '';
-      }
-    });
-  }
+
 
   // Expand Button Logic
   const expandBtn = document.getElementById('expand-btn');
@@ -184,7 +132,7 @@ function setupListeners() {
   if (DOM.chatInput) {
     DOM.chatInput.addEventListener('input', () => {
       autoResize(DOM.chatInput);
-      if (DOM.sendBtn) DOM.sendBtn.disabled = (DOM.chatInput.value.trim() === '' && !uploadedFileContent) || isSending;
+      if (DOM.sendBtn) DOM.sendBtn.disabled = DOM.chatInput.value.trim() === '' || isSending;
     });
 
     DOM.chatInput.addEventListener('keydown', (e) => {
@@ -370,7 +318,8 @@ async function loadThreadMessages(threadId, pushUrl = true) {
         addCopyButtons(assistantDiv);
         isSending = false;
         if (DOM.chatInput) {
-          if (DOM.sendBtn) DOM.sendBtn.disabled = DOM.chatInput.value.trim() === '' && !uploadedFileContent;
+          DOM.chatInput.focus();
+          if (DOM.sendBtn) DOM.sendBtn.disabled = DOM.chatInput.value.trim() === '';
         }
         loadThreads(); // reload to get any updated title
       }
@@ -549,18 +498,8 @@ function processThinkTags(text) {
 /* ---- 9. Send Message (Streaming) ---- */
 async function sendMessage() {
   let text = DOM.chatInput.value.trim();
-  if (!text && !uploadedFileContent) return;
+  if (!text) return;
   if (isSending) return;
-
-  if (uploadedFileContent) {
-    text = `[User uploaded file: ${uploadedFileName}]\n\nFile Content/Description:\n${uploadedFileContent}\n\nUser Query: ${text || "Please analyze this file."}`;
-    
-    // Clear upload state
-    uploadedFileContent = null;
-    uploadedFileName = null;
-    const filePill = document.getElementById('file-preview-pill');
-    if (filePill) filePill.style.display = 'none';
-  }
 
   if (!currentThreadId || currentThreadId === 'null' || currentThreadId === 'undefined') {
     try {

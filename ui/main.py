@@ -5,7 +5,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 import threading
 import uvicorn
-from fastapi import FastAPI, Form, Request, UploadFile, File
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, StreamingResponse, RedirectResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 import time
@@ -339,39 +339,6 @@ def get_file_content(path: str, thread_id: str = ""):
         return {"content": content, "path": path}
     except Exception as e:
         return {"error": str(e), "path": path}
-
-@app.post("/api/upload")
-async def upload_file(file: UploadFile = File(...)):
-    ext = file.filename.split(".")[-1].lower() if file.filename else ""
-    file_bytes = await file.read()
-    
-    if ext in ["pdf", "txt", "docx", "csv"]:
-        from firecrawl import FirecrawlApp
-        try:
-            fc_app = FirecrawlApp(api_key="fc-622a00f04c77417589271736496ce31c")
-            result = fc_app.parse(file_bytes, filename=file.filename)
-            markdown = result.markdown if hasattr(result, "markdown") else str(result)
-            return {"filename": file.filename, "content": markdown}
-        except Exception as e:
-            return JSONResponse(status_code=500, content={"error": str(e)})
-            
-    elif ext in ["png", "jpg", "jpeg", "webp", "gif"]:
-        import httpx
-        try:
-            async with httpx.AsyncClient() as client:
-                files = {"file": (file.filename, file_bytes, file.content_type or "image/jpeg")}
-                resp = await client.post("https://adhyanshverma-data-gen.hf.space/analyze", files=files, timeout=60.0)
-                resp.raise_for_status()
-                data = resp.json()
-                return {"filename": file.filename, "content": data.get("result", "")}
-        except Exception as e:
-            return JSONResponse(status_code=500, content={"error": str(e)})
-            
-    else:
-        try:
-            return {"filename": file.filename, "content": file_bytes.decode('utf-8')}
-        except:
-            return JSONResponse(status_code=400, content={"error": "Unsupported file type"})
 
 @app.delete("/api/threads/{thread_id}")
 def delete_thread(thread_id: str):
