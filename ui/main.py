@@ -626,8 +626,7 @@ def start_ui():
     APP_PORT = 8080
     
     if _port_in_use("127.0.0.1", APP_PORT):
-        print(f"
-ERROR: Port {APP_PORT} is already in use. Stop the process using it and retry.")
+        print(f"\nERROR: Port {APP_PORT} is already in use. Stop the process using it and retry.")
         sys.exit(1)
 
     # Start FastAPI server in a single daemon thread
@@ -636,8 +635,7 @@ ERROR: Port {APP_PORT} is already in use. Stop the process using it and retry.")
 
     # Wait for Uvicorn to actually bind the port
     if not wait_for_server("127.0.0.1", APP_PORT):
-        print(f"
-ERROR: Server did not start on port {APP_PORT}")
+        print(f"\nERROR: Server did not start on port {APP_PORT}")
         sys.exit(1)
 
     import webbrowser
@@ -648,9 +646,7 @@ ERROR: Server did not start on port {APP_PORT}")
     print(f"  🌐 LOCAL URL:     {url}")
     print("  💡 HINT:          Press CTRL+C to shutdown the server")
     print("=" * 60)
-    print("
-🚀 Launching interface in your default web browser...
-")
+    print("\n🚀 Launching interface in your default web browser...\n")
     
     webbrowser.open(url)
 
@@ -659,8 +655,7 @@ ERROR: Server did not start on port {APP_PORT}")
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
-        print("
-Shutting down SWARA...")
+        print("\nShutting down SWARA...")
 
 if __name__ == '__main__':
     start_ui()
