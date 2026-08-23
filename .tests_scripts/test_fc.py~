@@ -1,0 +1,15 @@
+import sys
+sys.path.insert(0, '/home/adhyansh/Projects/SWARA')
+from agent_dir.tools.firecrawl_tools import get_client
+
+client = get_client()
+res = client.search(query="Elon Musk net worth", limit=1, scrape_options={"formats": ["markdown"]})
+
+print("Type of res:", type(res))
+if hasattr(res, "model_dump"):
+    d = res.model_dump()
+    print("Keys of model_dump:", d.keys())
+elif isinstance(res, dict):
+    print("Keys of dict:", res.keys())
+    
+print("Raw res:", res)

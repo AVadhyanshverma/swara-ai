@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0812">
+  <title>SWARA</title>
+  <!-- Polyfill for older Chromium engines (fixes marked.js t.at error) -->
+  <script>
+    if (!String.prototype.at) {
+      String.prototype.at = function(n) {
+        n = Math.trunc(n) || 0;
+        if (n < 0) n += this.length;
+        if (n < 0 || n >= this.length) return undefined;
+        return String(this)[n];
+      };
+    }
+    if (!Array.prototype.at) {
+      Array.prototype.at = function(n) {
+        n = Math.trunc(n) || 0;
+        if (n < 0) n += this.length;
+        if (n < 0 || n >= this.length) return undefined;
+        return this[n];
+      };
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+  <div id="main-preloader" style="position:fixed;inset:0;background:#0a0812;z-index:9999;display:flex;align-items:center;justify-content:center;color:#7fff00;font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;transition:opacity 0.6s ease;letter-spacing:0.1em;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="animation:pulse-glow 4s ease-in-out infinite;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      <div><span id="main-pre-pct">000</span>%</div>
+    </div>
+  </div>
+
+  <!-- App Shell -->
+  <div id="app">
+
+    <!-- ========== SIDEBAR ========== -->
+    <aside id="sidebar">
+
+      <!-- Brand -->
+      <div class="sidebar-header" style="flex-direction: column; gap: 16px; align-items: stretch; padding-bottom: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="brand">
+            <!-- Brain Logo SVG -->
+            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+            </svg>
+            <span class="brand-name">SWARA</span>
+          </div>
+        </div>
+        <button class="new-chat-btn full-width-btn" id="new-chat-sidebar-btn" title="New Conversation (Ctrl K)" aria-label="New Conversation">
+          <div class="btn-left">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="NewChatAnimatedIcon-svg new-icon" data-animation-icon="true" data-animation-icon-enter-duration="0.41667" data-animation-icon-playback="trigger" data-v-9830b9c3=""><style>#NewChatAnimatedIcon-svg-rs-ew8n6j-p1{transform-box:view-box;transform-origin:0 0;animation:NewChatAnimatedIcon-svg-rs-ew8n6j-p1 0.4167s linear 1 forwards}@keyframes NewChatAnimatedIcon-svg-rs-ew8n6j-p1{0%{transform:translate(47.91667%,47.91667%);}8%{transform:translate(47.92083%,47.83333%) rotate(1.1795deg) scale(1.02022);}12%{transform:translate(47.9625%,47.75%) rotate(2.8374deg) scale(1.03026);}20%{transform:translate(48.175%,47.50417%) rotate(8.8167deg) scale(1.05041);}24%{transform:translate(48.36667%,47.3375%) rotate(13.4726deg) scale(1.06017);}32%{transform:translate(48.9625%,46.99167%) rotate(25.9719deg) scale(1.08008);}48%{transform:translate(50.62083%,46.75833%) rotate(55.8418deg) scale(1.12025);}52%{transform:translate(50.97917%,46.81667%) rotate(62.0737deg) scale(1.12953);}60%{transform:translate(51.54583%,46.98333%) rotate(72.1167deg) scale(1.14954);}68%{transform:translate(51.85833%,47.275%) rotate(79.3018deg) scale(1.12048);}76%{transform:translate(52.03333%,47.5125%) rotate(84.2633deg) scale(1.09046);}88%{transform:translate(52.12083%,47.76667%) rotate(88.52deg) scale(1.04535);}100%{transform:translate(52.08333%,47.91667%) rotate(90deg);}}[data-animation-icon-wrapper][data-animation-phase="idle"] .NewChatAnimatedIcon-svg *{animation:none!important}[data-animation-icon-wrapper][data-animation-phase="enter"] .NewChatAnimatedIcon-svg *{animation-direction:normal!important;animation-duration:417ms!important;animation-iteration-count:1!important;animation-fill-mode:forwards!important}</style><path id="NewChatAnimatedIcon-svg-rs-ew8n6j-p0" d="M 0 -9.9 C -5.468 -9.9 -9.9 -5.468 -9.9 0 C -9.9 1.923 -9.351 3.719 -8.402 5.239 C -8.402 5.239 -9.483 7.821 -9.483 7.821 C -9.896 8.809 -9.171 9.9 -8.099 9.9 C -8.099 9.9 0 9.9 0 9.9 C 5.468 9.9 9.9 5.468 9.9 0 C 9.9 -5.468 5.468 -9.9 0 -9.9 Z M -8.1 0 C -8.1 -4.474 -4.474 -8.1 0 -8.1 C 4.473 -8.1 8.1 -4.474 8.1 0 C 8.1 4.473 4.473 8.1 -0.001 8.1 C -0.001 8.1 -7.648 8.1 -7.648 8.1 L -6.365 5.035 C -6.365 5.035 -6.648 4.629 -6.648 4.629 C -7.563 3.317 -8.1 1.723 -8.1 0 Z" transform="matrix(1 0 0 1 12 12)" fill="currentColor" fill-opacity="0.902" fill-rule="evenodd"></path><path id="NewChatAnimatedIcon-svg-rs-ew8n6j-p1" d="M 3.6 0.5 L -2.6 0.5 M 0.5 -2.573 L 0.5 3.573" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="transform-box:view-box;transform-origin:0 0;transform:translate(47.91667%,47.91667%);"></path></svg>
+            <span>New Chat</span>
+          </div>
+          <div class="shortcut-hint">
+            <span class="key">Ctrl</span>
+            <span class="key">K</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Search -->
+      <div class="sidebar-search">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="search-input" placeholder="Search chats…" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Thread List -->
+      <nav id="thread-list" class="thread-list" aria-label="Conversations"></nav>
+
+      <!-- Footer Status / Settings -->
+      <div class="sidebar-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="status-badge" style="background: transparent; border: none; padding: 0;">
+          <span class="status-dot"></span>
+          <span style="color: var(--t2); font-weight: 500;">Local-First Engine</span>
+        </div>
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme" aria-label="Toggle Theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Sidebar Resize Handle -->
+      <div id="sidebar-resizer" class="resizer-handle resizer-right"></div>
+    </aside>
+
+    <!-- ========== MAIN AREA ========== -->
+    <main id="main-area">
+
+      <!-- Main Top Bar -->
+      <header id="main-topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle-btn" class="btn-icon" title="Toggle Sidebar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <g data-animation-icon-layer="idle"><path id="LeftBar2Timeline1Icon-idle-rs-pm22zp-mh0" d="M 0 7.151 L 0 -7.081" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="matrix(1 0 0 1 9.3 11.8)"></path><path id="LeftBar2Timeline1Icon-idle-rs-pm22zp-mh1" d="M -7.9 -4.8 C -7.9 -6.512 -6.512 -7.9 -4.8 -7.9 L 4.8 -7.9 C 6.512 -7.9 7.9 -6.512 7.9 -4.8 L 7.9 4.8 C 7.9 6.512 6.512 7.9 4.8 7.9 L -4.8 7.9 C -6.512 7.9 -7.9 6.512 -7.9 4.8 L -7.9 -4.8 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter" transform="matrix(1 0 0 1 11.8 11.8)"></path><path id="LeftBar2Timeline1Icon-idle-rs-pm22zp-mh2" d="M -1.25 -2.5 L 1.25 0 L -1.25 2.5" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform-box: view-box; transform-origin: 0px 0px 0px; transform: translate(52.95%, 50.625%) matrix(0.6, 0, 0, -0.6, 0, 0); opacity: 0; stroke: currentcolor; stroke-opacity: 0.2;"></path></g>
+            </svg>
+          </button>
+          <button id="new-chat-btn-topbar" class="btn-icon new-chat-btn" title="New Conversation" aria-label="New Conversation" style="margin-left: 4px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </button>
+          <span class="chat-header-title" id="chat-title" style="margin-left: 8px;"></span>
+        </div>
+        <div class="topbar-right">
+          <div class="model-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Multi-Model</span>
+          </div>
+          <button class="btn-icon" title="Settings" id="settings-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Welcome Screen -->
+      <div id="welcome-screen">
+        <!-- Large Logo -->
+        <svg class="welcome-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+          <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+          <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+          <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/>
+          <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/>
+          <path d="M3.477 10.896a4 4 0 0 1 .585-.396"/>
+          <path d="M19.938 10.5a4 4 0 0 1 .585.396"/>
+          <path d="M6 18a4 4 0 0 1-1.967-.516"/>
+          <path d="M19.967 17.484A4 4 0 0 1 18 18"/>
+        </svg>
+        <h1 class="welcome-title">SWARA</h1>
+        <p class="welcome-sub">Student AI Agent. Unlock your full potential.</p>
+
+        <!-- Feature Pills -->
+        <div class="welcome-pills">
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Local-First Privacy</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg> Autonomous Engine</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> Tool Calling</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Long-term Memory</div>
+        </div>
+
+        <!-- Suggestion Cards -->
+        <div class="suggestions-grid">
+          <div class="suggestion-card" data-prompt="ResearchMode: Active. DeepThinking: Active. SelfCritique: Active. Your task is it research the internet for the topic provided here as, '{YOUR TOPIC HERE}'">
+            <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="MicroscopeTimeline1Icon-svg next-sidebar-nav-item__icon" data-animation-icon="true" data-animation-icon-enter-duration="0.66667" data-animation-icon-playback="trigger" data-v-4bb5547c=""><style>#MicroscopeTimeline1Icon-enter-rs-zd41x3-p0{transform-box:view-box;transform-origin:0 0;animation:MicroscopeTimeline1Icon-enter-rs-zd41x3-p0 0.6667s linear 1 forwards}@keyframes MicroscopeTimeline1Icon-enter-rs-zd41x3-p0{0%{transform:translate(81.25%,41.66667%);}7.5%{transform:translate(81.25%,41.66667%) rotate(1.5466deg);}15%{transform:translate(81.25%,41.66667%) rotate(7.2387deg);}20%{transform:translate(81.25%,41.66667%) rotate(9.8486deg);}25%{transform:translate(81.25%,41.66667%) rotate(11.1863deg);}35%{transform:translate(81.25%,41.66667%) rotate(12.0067deg);}47.5%{transform:translate(81.25%,41.66667%) rotate(12.0067deg);}52.5%{transform:translate(81.25%,41.66667%) rotate(10.9504deg);}60%{transform:translate(81.25%,41.66667%) rotate(4.1877deg);}67.5%{transform:translate(81.25%,41.66667%) rotate(0.7448deg);}100%{transform:translate(81.25%,41.66667%);}}#MicroscopeTimeline1Icon-enter-rs-zd41x3-p1{transform-box:view-box;transform-origin:0 0;animation:MicroscopeTimeline1Icon-enter-rs-zd41x3-p1 0.6667s linear 1 forwards}@keyframes MicroscopeTimeline1Icon-enter-rs-zd41x3-p1{0%{transform:translate(26.66667%,64.58333%) rotate(-133.0949deg);}7.5%{transform:translate(26.05833%,63.07917%) rotate(-131.5146deg);}15%{transform:translate(24.2125%,57.52917%) rotate(-125.8841deg);}20%{transform:translate(23.55417%,54.925%) rotate(-123.2449deg);}27.5%{transform:translate(23.17917%,53.17917%) rotate(-121.5437deg);}35%{transform:translate(23.09583%,52.7375%) rotate(-121.1308deg);}47.5%{transform:translate(23.09583%,52.7375%) rotate(-121.1308deg);}52.5%{transform:translate(23.30833%,53.80417%) rotate(-122.1329deg);}60%{transform:translate(25.14583%,60.5625%) rotate(-128.9104deg);}67.5%{transform:translate(26.375%,63.87917%) rotate(-132.3662deg);}75%{transform:translate(26.66667%,64.58333%) rotate(-133.0949deg);}100%{transform:translate(26.66667%,64.58333%) rotate(-133.0949deg);}}#MicroscopeTimeline1Icon-idle-rs-zd41x3-p0{transform-box:view-box;transform-origin:0 0;}#MicroscopeTimeline1Icon-idle-rs-zd41x3-p1{transform-box:view-box;transform-origin:0 0;}[data-animation-icon-wrapper][data-animation-phase="idle"] .MicroscopeTimeline1Icon-svg *{animation:none!important}[data-animation-icon-wrapper][data-animation-phase="enter"] .MicroscopeTimeline1Icon-svg *{animation-direction:normal!important;animation-duration:667ms!important;animation-iteration-count:1!important;animation-fill-mode:forwards!important}[data-animation-icon-layer][hidden]{display:none!important}</style><g data-animation-icon-layer="idle"><path id="MicroscopeTimeline1Icon-idle-rs-zd41x3-p0" d="M -6.316 -5.501 C -5.947 -5.881 -5.369 -5.894 -4.981 -5.584 C -4.981 -5.584 -4.906 -5.518 -4.906 -5.518 L -4.884 -5.495 L -2.303 -2.779 C -2.303 -2.779 -2.264 -2.736 -2.264 -2.736 C -1.95 -2.36 -1.94 -1.78 -2.311 -1.396 C -2.311 -1.396 -7.811 4.306 -7.811 4.306 C -7.811 4.306 -7.816 4.312 -7.816 4.312 C -8.212 4.715 -8.859 4.707 -9.246 4.303 C -9.246 4.303 -9.248 4.301 -9.248 4.301 C -9.248 4.301 -11.823 1.593 -11.823 1.593 C -12.19 1.208 -12.195 0.595 -11.821 0.205 C -11.821 0.205 -11.819 0.203 -11.819 0.203 L -6.319 -5.499 C -6.319 -5.499 -6.316 -5.501 -6.316 -5.501 Z M -3.476 -6.798 C -3.103 -7.181 -2.508 -7.196 -2.116 -6.862 C -2.116 -6.862 -2.041 -6.791 -2.041 -6.791 L -2.041 -6.79 L -1.047 -5.745 C -1.047 -5.745 -1.043 -5.741 -1.043 -5.741 C -0.7 -5.376 -0.681 -4.817 -0.986 -4.432 C -0.986 -4.432 -1.052 -4.356 -1.052 -4.356 C -1.052 -4.356 -1.784 -3.598 -1.784 -3.598 C -1.955 -3.421 -2.19 -3.322 -2.436 -3.323 C -2.681 -3.324 -2.915 -3.425 -3.084 -3.603 C -3.084 -3.603 -4.215 -4.792 -4.215 -4.792 C -4.547 -5.141 -4.545 -5.691 -4.21 -6.038 C -4.21 -6.038 -3.478 -6.796 -3.478 -6.796 L -3.476 -6.799 C -3.476 -6.799 -3.476 -6.798 -3.476 -6.798 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform-box:view-box;transform-origin:0 0;transform:translate(81.25%,41.66667%);"></path><path id="MicroscopeTimeline1Icon-idle-rs-zd41x3-p1" d="M 2.193 -0.002 L -2.193 0.002" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform-box:view-box;transform-origin:0 0;transform:translate(26.66667%,64.58333%) rotate(-133.0949deg);"></path><path id="MicroscopeTimeline1Icon-idle-rs-zd41x3-p2" d="M 0.47 -5.5 C 0.47 -5.5 2.47 -4 2.759 -1.246 C 3.03 1.342 1.47 4.5 -3.03 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="round" transform="matrix(1 0 0 1 16.23 15.26)"></path><path id="MicroscopeTimeline1Icon-idle-rs-zd41x3-p3" d="M -6.8 0 L 6.8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="matrix(1 0 0 1 12.2 20.96)"></path></g><g data-animation-icon-layer="enter" hidden=""><path id="MicroscopeTimeline1Icon-enter-rs-zd41x3-p0" d="M -6.316 -5.501 C -5.947 -5.881 -5.369 -5.894 -4.981 -5.584 C -4.981 -5.584 -4.906 -5.518 -4.906 -5.518 L -4.884 -5.495 L -2.303 -2.779 C -2.303 -2.779 -2.264 -2.736 -2.264 -2.736 C -1.95 -2.36 -1.94 -1.78 -2.311 -1.396 C -2.311 -1.396 -7.811 4.306 -7.811 4.306 C -7.811 4.306 -7.816 4.312 -7.816 4.312 C -8.212 4.715 -8.859 4.707 -9.246 4.303 C -9.246 4.303 -9.248 4.301 -9.248 4.301 C -9.248 4.301 -11.823 1.593 -11.823 1.593 C -12.19 1.208 -12.195 0.595 -11.821 0.205 C -11.821 0.205 -11.819 0.203 -11.819 0.203 L -6.319 -5.499 C -6.319 -5.499 -6.316 -5.501 -6.316 -5.501 Z M -3.476 -6.798 C -3.103 -7.181 -2.508 -7.196 -2.116 -6.862 C -2.116 -6.862 -2.041 -6.791 -2.041 -6.791 L -2.041 -6.79 L -1.047 -5.745 C -1.047 -5.745 -1.043 -5.741 -1.043 -5.741 C -0.7 -5.376 -0.681 -4.817 -0.986 -4.432 C -0.986 -4.432 -1.052 -4.356 -1.052 -4.356 C -1.052 -4.356 -1.784 -3.598 -1.784 -3.598 C -1.955 -3.421 -2.19 -3.322 -2.436 -3.323 C -2.681 -3.324 -2.915 -3.425 -3.084 -3.603 C -3.084 -3.603 -4.215 -4.792 -4.215 -4.792 C -4.547 -5.141 -4.545 -5.691 -4.21 -6.038 C -4.21 -6.038 -3.478 -6.796 -3.478 -6.796 L -3.476 -6.799 C -3.476 -6.799 -3.476 -6.798 -3.476 -6.798 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path id="MicroscopeTimeline1Icon-enter-rs-zd41x3-p1" d="M 2.193 -0.002 L -2.193 0.002" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="d" values="M 2.193 -0.002 L -2.193 0.002;M 2.176 -0.002 L -2.176 0.002;M 2.113 -0.002 L -2.113 0.002;M 1.984 -0.002 L -1.984 0.002;M 1.767 -0.002 L -1.767 0.002;M 1.488 -0.001 L -1.488 0.001;M 1.228 -0.001 L -1.228 0.001;M 1.027 -0.001 L -1.027 0.001;M 0.881 -0.001 L -0.881 0.001;M 0.776 -0.001 L -0.776 0.001;M 0.702 -0.001 L -0.702 0.001;M 0.651 -0.001 L -0.651 0.001;M 0.617 -0.001 L -0.617 0.001;M 0.599 -0.001 L -0.599 0.001;M 0.592 -0.001 L -0.592 0.001;M 0.592 -0.001 L -0.592 0.001;M 0.621 -0.001 L -0.621 0.001;M 0.733 -0.001 L -0.733 0.001;M 0.973 -0.001 L -0.973 0.001;M 1.323 -0.001 L -1.323 0.001;M 1.638 -0.002 L -1.638 0.002;M 1.857 -0.002 L -1.857 0.002;M 2.001 -0.002 L -2.001 0.002;M 2.094 -0.002 L -2.094 0.002;M 2.152 -0.002 L -2.152 0.002;M 2.183 -0.002 L -2.183 0.002;M 2.193 -0.002 L -2.193 0.002;M 2.193 -0.002 L -2.193 0.002" keyTimes="0;0.025;0.05;0.075;0.1;0.125;0.15;0.175;0.2;0.225;0.25;0.275;0.3;0.325;0.35;0.475;0.5;0.525;0.55;0.575;0.6;0.625;0.65;0.675;0.7;0.725;0.75;1" dur="0.66667s" repeatCount="1" fill="freeze"></animate></path><path id="MicroscopeTimeline1Icon-enter-rs-zd41x3-p2" d="M 0.47 -5.5 C 0.47 -5.5 2.47 -4 2.759 -1.246 C 3.03 1.342 1.47 4.5 -3.03 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="round" transform="matrix(1 0 0 1 16.23 15.26)"></path><path id="MicroscopeTimeline1Icon-enter-rs-zd41x3-p3" d="M -6.8 0 L 6.8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="matrix(1 0 0 1 12.2 20.96)"></path></g></svg></div>
+            <div class="card-title">DeepResearch</div>
+            <div class="card-desc">Search the web for the 'X' topix you want.</div>
+          </div>
+          <div class="suggestion-card" data-prompt="CrativeDesigning: Active. You need to make a, '{REPORT/DOCUMENT/PRESENTATION/SHEET}' for the following need of mine as follows, '{YOUR NEED HERE!}'">
+            <div class="card-icon"><svg data-v-d99e8987="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" class="iconify project-icon__folder" width="18" height="18" viewBox="0 0 1024 1024" name="Folder"><path d="M394.112 157.866667a162.133333 162.133333 0 0 1 128.512 63.274666l8.234667 10.666667H768a162.133333 162.133333 0 0 1 162.133333 162.133333V704a162.133333 162.133333 0 0 1-162.133333 162.133333H256a162.133333 162.133333 0 0 1-162.133333-162.133333v-384A162.133333 162.133333 0 0 1 256 157.866667h138.112zM256 234.666667a85.333333 85.333333 0 0 0-85.333333 85.333333v384a85.333333 85.333333 0 0 0 85.333333 85.333333h512a85.333333 85.333333 0 0 0 84.906667-76.629333L853.333333 704V393.941333a85.333333 85.333333 0 0 0-76.629333-84.864L768 308.650667h-253.952l-4.906667-0.298667a42.709333 42.709333 0 0 1-28.928-16.384l-18.474666-24.021333a85.333333 85.333333 0 0 0-67.626667-33.28H256z m426.666667 174.933333a38.4 38.4 0 0 1 0 76.8H341.333333a38.4 38.4 0 0 1 0-76.8h341.333334z" fill="currentColor"></path></svg></div>
+            <div class="card-title">Files</div>
+            <div class="card-desc">Need an report or a presentation or some data for your work. Grab it here!</div>
+          </div>
+          <div class="suggestion-card" data-prompt="Thinking: True, PossibilityChecking: True, SelfCritique: True. Now you need to find Ideas or help the user decide on a spefic thing which they might be finding difficult or need some exploration regarding the following, '{TOPIC/NEED/PROBLEM}'. To Gurantee this you need to make sure to confirm and understand users intent.">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/></svg></div>
+            <div class="card-title">BrainStorm</div>
+            <div class="card-desc">Have an Idea. Let's deep dive into it.</div>
+          </div>
+          <div class="suggestion-card" data-prompt="Mindmap Generation: Active. I want to create a detailed mindmap. Please ask me for the exact topic I want to map out. Once I provide the topic, generate a comprehensive mindmap for me using Mermaid.js syntax.">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></div>
+            <div class="card-title">Mindmap</div>
+            <div class="card-desc">Visualize your thoughts into structured maps.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Chat Area -->
+      <div id="chat-area" class="hidden">
+        <div id="chat-container"></div>
+      </div>
+
+      <!-- Input Area (always visible at bottom) -->
+      <div id="input-area">
+        <div id="input-wrapper" style="flex-direction: column; align-items: stretch; gap: 8px; border-radius: 16px; padding: 12px 16px;">
+          <!-- Hidden File Input -->
+          <input type="file" id="file-upload-input" style="display: none;" />
+          
+          <!-- Selected File Pill -->
+          <div id="file-preview-pill" class="hidden" style="display: none; align-items: center; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 6px 10px; width: fit-content; font-size: 12px; color: #E4E4E7; border: 1px solid rgba(255,255,255,0.1);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span id="file-name-text">filename.pdf</span>
+            <svg id="remove-file-btn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px; cursor: pointer;" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </div>
+
+          <!-- Textarea -->
+          <textarea id="chat-input" placeholder='Type "/" to invoke plugins and skills' rows="1" aria-label="Message input" style="width: 100%; padding: 10px 20px; min-height: 40px; margin-bottom: 8px; height: 100%; border-radius: 11px;"></textarea>
+          
+          <div class="input-actions-row" style="display: flex; justify-content: space-between; align-items: center;">
+            <button id="upload-btn" class="btn-icon" title="Upload File" style="opacity: 0.7;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            
+            <div class="right-actions" style="display: flex; gap: 12px; align-items: center;">
+              <button id="expand-btn" class="btn-icon" title="Expand" style="opacity: 0.7;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              </button>
+              <button id="send-btn" disabled title="Send" aria-label="Send message" style="background: var(--t1); color: var(--bg); border-radius: 50%; padding: 6px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="input-hint">
+          <span>Responses may be inaccurate — verify important details.</span>
+        </div>
+      </div>
+
+      <!-- File Preview Panel -->
+      <div id="file-panel" class="hidden">
+        <!-- File Panel Resize Handle -->
+        <div id="file-panel-resizer" class="resizer-handle resizer-left"></div>
+        <div class="file-panel-header">
+          <div class="file-panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+            <span id="file-panel-name">File Preview</span>
+          </div>
+          <button id="file-panel-close" class="btn-icon" title="Close Preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="file-panel-content">
+          <pre><code id="file-panel-code">Loading...</code></pre>
+        </div>
+      </div>
+
+      <!-- Settings Modal -->
+      <div id="settings-modal" class="hidden">
+        <div class="settings-content">
+          <div class="settings-header">
+            <h2>Settings</h2>
+            <button id="settings-close-btn" class="btn-icon" title="Close">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <div class="settings-body">
+            <div class="settings-section">
+              <h3>Profile</h3>
+              <form id="settings-profile-form">
+                <label>Name</label>
+                <input type="text" id="settings-name" required>
+                <label>Date of Birth</label>
+                <input type="date" id="settings-dob" required>
+                <label>AI Persona</label>
+                <textarea id="settings-persona" rows="3" required></textarea>
+                <button type="submit" class="settings-btn settings-save-btn">Save Profile</button>
+              </form>
+            </div>
+            <div class="settings-section">
+              <h3>Data Management</h3>
+              <button id="settings-backup-btn" class="settings-btn settings-action-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span class="btn-text">Backup Chats</span>
+              </button>
+              <button id="settings-delete-chats-btn" class="settings-btn settings-danger-btn">Delete All Chats</button>
+              <button id="settings-delete-account-btn" class="settings-btn settings-danger-btn">Delete Account</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- External dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+  <script src="/static/js/app.js?v=11"></script>
+</body>
+</html>

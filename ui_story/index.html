@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0B0B0F" />
+<meta name="description" content="SWARA — a local-first AI workspace with encrypted local history and explicit cloud-assisted features." />
+<title>SWARA — Local-First AI</title>
+
+<!-- Fonts as <link> (not CSS @import) so they don't block stylesheet parsing -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" />
+
+<link rel="stylesheet" href="/ui_story_static/style.css" />
+</head>
+
+<body class="is-loading">
+
+  <!-- ── PRELOADER ─────────────────────────────────────────── -->
+  <div id="preloader">
+    <div class="pre-inner">
+      <div class="pre-word">SWARA</div>
+      <div class="pre-bar"><span id="pre-fill"></span></div>
+      <div class="pre-meta"><span id="pre-pct">000</span> · INITIALIZING LOCAL ENGINE</div>
+    </div>
+  </div>
+
+  <!-- ── CURSOR ────────────────────────────────────────────── -->
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot"  id="cursor-dot"  aria-hidden="true"></div>
+
+  <!-- ── HUD ───────────────────────────────────────────────── -->
+  <div id="hud">
+    <div class="hud-corner top-left"><span id="hud-status">SCROLL TO DIVE IN</span></div>
+    <div class="hud-corner top-center">SWARA</div>
+    <div class="hud-corner top-right" id="engine-pill">LOCAL-FIRST ENGINE <span class="status-dot"></span></div>
+
+    <div class="hud-corner bottom-left">
+      <span class="hud-index"><b id="chapter-num">01</b><i>/05</i></span>
+      <span class="hud-chapter" id="chapter-name">ORIGIN</span>
+    </div>
+
+    <div class="hud-corner bottom-right">
+      <span id="scroll-pct">00</span><i class="hud-dim">%</i>
+    </div>
+
+    <div class="progress-rail"><span class="progress-fill" id="progress-fill"></span></div>
+  </div>
+
+  <!-- ── SCROLLYTELLING CONTENT ────────────────────────────── -->
+  <div class="content-overlay">
+
+    <div class="section intro-section">
+      <h1 class="title-top-left chromatic-text" data-split="chars">SWARA</h1>
+
+      <p class="subtitle-center" data-split="words">
+        A local-first AI workspace for students to unlock their potential.<br />
+        Your history and workspace stay on your machine by default.<br />
+        Hosted models and selected tools are clearly disclosed.
+      </p>
+
+      <div class="scroll-cue" aria-hidden="true"><span></span></div>
+
+      <h1 class="title-bottom-right chromatic-text" data-split="chars">AGENTS</h1>
+    </div>
+
+    <div class="section data-section">
+      <div class="data-point tooltip-container">
+        <span class="highlight" data-count="98.9" data-suffix="%">0%</span>
+        <span class="data-label">
+          LOCAL-FIRST PRIVACY
+          <span class="info-btn">i</span>
+          <div class="tooltip-box">History and workspace files stay local by default. Hosted models and web tools receive data when those features are used.</div>
+        </span>
+      </div>
+      <div class="data-point">
+        <span class="highlight glyph">4</span>
+        <span class="data-label">UPTO AGENTS</span>
+      </div>
+      <div class="data-point">
+        <span class="highlight" data-count="7" data-suffix="+">0+</span>
+        <span class="data-label">BUILT-IN TOOLS</span>
+      </div>
+      <div class="data-point tooltip-container">
+        <span class="highlight" data-count="1" data-from="999">999</span>
+        <span class="data-label">
+          CLOUD FEATURES
+          <span class="info-btn">i</span>
+          <div class="tooltip-box">Model inference, web search, and some file analysis use hosted services. Review provider policies before sending sensitive data.</div>
+        </span>
+      </div>
+    </div>
+
+    <!-- Copy on the LEFT while the sphere holds on the RIGHT -->
+    <div class="section sphere-right-text">
+      <div class="sphere-text-block left-aligned">
+        <h2 class="sphere-heading" data-split="words">Autonomous<br />Intelligence</h2>
+        <p class="sphere-subtext" data-split="words">Multi-model agent swarm<br />that thinks for you</p>
+      </div>
+    </div>
+
+    <!-- Copy on the RIGHT while the sphere holds on the LEFT -->
+    <div class="section sphere-left-text">
+      <div class="sphere-text-block right-aligned">
+        <h2 class="sphere-heading" data-split="words">Encrypted<br />Architecture</h2>
+        <p class="sphere-subtext" data-split="words">Hardware-bound encryption<br /></p>
+      </div>
+    </div>
+
+    <div class="section final-section">
+      <h2 class="title title-main" data-split="words">Your mind. Your machine.</h2>
+      <h2 class="title subtitle-final" data-split="words">Start exploring.</h2>
+      <button class="cta-button" id="enter-button">
+        <span class="cta-label">Launch SWARA</span>
+        <span class="cta-fill" aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Invisible height that drives the whole timeline -->
+  <div class="scroll-container"></div>
+
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Classic scripts run before the deferred module below -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="/ui_story_static/app.js"></script>
+</body>
+</html>

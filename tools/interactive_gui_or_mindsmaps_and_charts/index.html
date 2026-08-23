@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Mindmap Wizard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            box-sizing: border-box;
+            background-color: #fafafa;
+        }
+        #wizard {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        #wizard h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        #wizard select, #wizard textarea, #wizard button {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        #wizard textarea {
+            height: 150px;
+            font-family: 'Courier New', Courier, monospace;
+            resize: vertical;
+        }
+        #wizard button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        #wizard button:hover {
+            background-color: #0056b3;
+        }
+        /* Mindmap container */
+        #mindmap-wrapper {
+            flex: 1;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .markmap-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+        }
+        .markmap-container svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- Include local autoloader -->
+    <script src="markmap-autoloader.js"></script>
+</head>
+<body>
+
+    <div id="wizard">
+        <h2>AI Mindmap Setup Wizard</h2>
+        <p>Ask your AI agent to generate a mindmap using Markdown, or try a sample below.</p>
+        
+        <label for="chart-selector"><strong>Select a Chart:</strong></label>
+        <select id="chart-selector">
+            <option value="sample1">Sample 1: AI Capabilities</option>
+            <option value="sample2">Sample 2: Web Dev Stack</option>
+            <option value="sample3">Sample 3: Project Architecture</option>
+            <option value="custom">Custom (Paste AI Output Below)</option>
+        </select>
+
+        <textarea id="markdown-input" placeholder="Paste Markdown mindmap here..."></textarea>
+        
+        <button id="render-btn">Render Mindmap</button>
+    </div>
+
+    <div id="mindmap-wrapper">
+        <div class="markmap-container" id="chart-canvas"></div>
+    </div>
+
+    <script>
+        const samples = {
+            sample1: `# AI Capabilities\n## Language\n### Text Generation\n### Translation\n### Summarization\n## Vision\n### Image Generation\n### Object Detection\n## Audio\n### Speech to Text\n### Text to Speech`,
+            sample2: `# Web Dev Stack\n## Frontend\n### React\n### Vue\n### HTML/CSS\n## Backend\n### Node.js\n### Python\n### Go\n## Database\n### PostgreSQL\n### MongoDB`,
+            sample3: `# Project Architecture\n## Client Layer\n### Browser App\n### Mobile App\n## API Gateway\n### Rate Limiting\n### Authentication\n## Microservices\n### User Service\n### Order Service\n### Payment Service`
+        };
+
+        const selector = document.getElementById('chart-selector');
+        const input = document.getElementById('markdown-input');
+        const renderBtn = document.getElementById('render-btn');
+        const canvas = document.getElementById('chart-canvas');
+
+        // Load sample text into textarea
+        function loadSample() {
+            const val = selector.value;
+            if (val !== 'custom') {
+                input.value = samples[val];
+            } else {
+                input.value = '';
+            }
+        }
+
+        selector.addEventListener('change', loadSample);
+
+        // Render the mindmap manually
+        renderBtn.addEventListener('click', () => {
+            if (!input.value.trim()) return;
+            
+            // Clean container and insert text
+            canvas.innerHTML = '';
+            canvas.textContent = input.value;
+            
+            // Call Markmap autoloader to render the specific container
+            if (window.markmap && window.markmap.autoLoader) {
+                window.markmap.autoLoader.render(canvas);
+            } else {
+                console.error("Markmap autoloader not initialized yet.");
+            }
+        });
+
+        // Initialize first load
+        loadSample();
+        
+        // Render initially when everything is ready
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                renderBtn.click();
+            }, 500); // Give autoloader a moment to load base scripts
+        });
+    </script>
+</body>
+</html>

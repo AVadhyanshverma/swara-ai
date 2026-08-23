@@ -1,0 +1,71 @@
+{
+  "search_evolution": {
+    "success": true,
+    "data": {
+      "web": [
+        {
+          "url": "https://www.adaptivesecurity.com/blog/ransomware-trends-2026",
+          "title": "Ransomware Trends 2026: AI Attacks & Defense Strategies",
+          "description": "Explore the alarming ransomware trends of 2026, including AI-driven attacks and RaaS industrialization. Learn how to build resilience ...",
+          "position": 1
+        },
+        {
+          "url": "https://www.cyber.nj.gov/threat-landscape/ransomware/the-evolution-of-ransomware-a-5-year-perspective",
+          "title": "The Evolution of Ransomware: A 5-Year Perspective - NJCCIC",
+          "description": "WannaCry was a true ransomware in which the decryptor would execute to decrypt the files after. WannaCry, a new ransomware variant dubbed NotPetya exploited ...",
+          "position": 2
+        },
+        {
+          "url": "https://www.halcyon.ai/ransomware-research/reports",
+          "title": "Reports",
+          "description": "Ransomware Evolution Report tracks the latest RaaS group activity, attack trends, and threat actor power rankings from the first quarter of 2026.",
+          "position": 3
+        }
+      ]
+    },
+    "creditsUsed": 2,
+    "id": "01a01570-6738-7087-8599-8080f1381763"
+  },
+  "search_mitre": {
+    "success": true,
+    "data": {
+      "web": [
+        {
+          "url": "https://attack.mitre.org/",
+          "title": "MITRE ATT&CK\u00ae",
+          "description": "MITRE ATT&CK\u00ae is a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations.\n\n## ATT&CK Matrix for Enterprise\n|  |\n|-|\n| [Hijack Execution Flow\u00a0(12)](https://attack.mitre.org/techniques/T1574) |\n| [DLL](https://attack.mitre.org/techniques/T1574/001)<br>[Dylib Hijacking](https://attack.mitre.org/techniques/T1574/004)<br>[Executable Installer File Permissions Weakness](https://attack.mitre.org/techniques/T1574/005)<br>[Dynamic Linker Hijacking](https://attack.mitre.org/techniques/T1574/006)<br>[Path Interception by PATH Environment Variable](https://attack.mitre.org/techniques/T1574/007)<br>[Path Interception by Search Order Hijacking](https://attack.mitre.org/techniques/T1574/008)<br>[Path Interception by Unquoted Path](https://attack.mitre.org/techniques/T1574/009)<br>[Services File Permissions Weakness](https://attack.mitre.org/techniques/T1574/010)<br>[Services Registry Permissions Weakness](https://attack.mitre.org/techniques/T1574/011)<br>[COR_PROFILER](https://attack.mitre.org/techniques/T1574/012)<br>[KernelCallbackTable](https://attack.mitre.org/techniques/T1574/013)<br>[AppDomainManager](https://attack.mitre.org/techniques/T1574/014) |\n\n|  |\n|-|\n| [Hijack Execution Flow\u00a0(12)](https://attack.mitre.org/techniques/T1574) |\n| [DLL](https://attack.mitre.org/techniques/T1574/001)<br>[Dylib Hijacking](https://attack.mitre.org/techniques/T1574/004)<br>[Executable Installer File Permissions Weakness](https://attack.mitre.org/techniques/T1574/005)<br>[Dynamic Linker Hijacking](https://attack.mitre.org/techniques/T1574/006)<br>[Path Interception by PATH Environment Variable](https://attack.mitre.org/techniques/T1574/007)<br>[Path Interception by Search Order Hijacking](https://attack.mitre.org/techniques/T1574/008)<br>[Path Interception by Unquoted Path](https://attack.mitre.org/techniques/T1574/009)<br>[Services File Permissions Weakness](https://attack.mitre.org/techniques/T1574/010)<br>[Services Registry Permissions Weakness](https://attack.mitre.org/techniques/T1574/011)<br>[COR_PROFILER](https://attack.mitre.org/techniques/T1574/012)<br>[KernelCallbackTable](https://attack.mitre.org/techniques/T1574/013)<br>[AppDomainManager](https://attack.mitre.org/techniques/T1574/014) |\n\n|  |\n|-|\n| [Subvert Trust Controls\u00a0(6)](https://attack.mitre.org/techniques/T1553) |\n| [Gatekeeper Bypass](https://attack.mitre.org/techniques/T1553/001)<br>[Code Signing](https://attack.mitre.org/techniques/T1553/002)<br>[SIP and Trust Provider Hijacking](https://attack.mitre.org/techniques/T1553/003)<br>[Install Root Certificate](https://attack.mitre.org/techniques/T1553/004)<br>[Mark-of-the-Web Bypass](https://attack.mitre.org/techniques/T1553/005)<br>[Code Signing Policy Modification](https://attack.mitre.org/techniques/T1553/006) |\n\n|  |\n|-|\n| [Weaken Encryption\u00a0(2)](https://attack.mitre.org/techniques/T1600) |\n| [Reduce Key Space](https://attack.mitre.org/techniques/T1600/001)<br>[Disable Crypto Hardware](https://attack.mitre.org/techniques/T1600/002) |  |  |  |\n| --- |\n| [Adversary-in-the-Middle\u00a0(4)](https://attack.mitre.org/techniques/T1557) |\n| [Name Resolution Poisoning and SMB Relay](https://attack.mitre.org/techniques/T1557/001)<br>[ARP Cache Poisoning](https://attack.mitre.org/techniques/T1557/002)<br>[DHCP Spoofing](https://attack.mitre.org/techniques/T1557/003)<br>[Evil Twin](https://attack.mitre.org/techniques/T1557/004) |\n\n|  |\n|-|\n| [Remote Service Session Hijacking\u00a0(2)](https://attack.mitre.org/techniques/T1563) |\n| [SSH Hijacking](https://attack.mitre.org/techniques/T1563/001)<br>[RDP Hijacking](https://attack.mitre.org/techniques/T1563/002) |\n\n|  |\n|-|\n| [Exfiltration Over Alternative Protocol\u00a0(3)](https://attack.mitre.org/techniques/T1048) |\n| [Exfiltration Over Symmetric Encrypted Non-C2 Protocol](https://attack.mitre.org/techniques/T1048/001)<br>[Exfiltration Over Asymmetric Encrypted Non-C2 Protocol](https://attack.mitre.org/techniques/T1048/002)<br>[Exfiltration Over Unencrypted Non-C2 Protocol](https://attack.mitre.org/techniques/T1048/003) |",
+          "position": 1
+        },
+        {
+          "url": "https://www.picussecurity.com/resource/the-top-ten-mitre-attack-techniques",
+          "title": "The Top Ten MITRE ATT&CK Techniques",
+          "description": "# The Top Ten MITRE ATT&CK Techniques\n## Executive Summary\nThis research has found that T1055 Process Injection was the most prevalent technique, and Defense Evasion and Persistence were the dominating tactics observed in 2025.\n\n## MITRE ATT&CK Framework\nWhile a tactic specifies a goal that an adversary is trying to achieve, a technique represents how an adversary accomplishes the tactic by performing an action.\n\nThe MITRE ATT&CK Matrix for Enterprise [1] consists of 14 tactics: Reconnaissance, Resource Development, Initial Access, Execution, Persistence, Privilege Escalation, Defense Evasion, Credential Access, Discovery, Lateral Movement, Collection, Command and Control, Exfiltration, and Impact. For example, the Process Injection technique is used by attackers for Defense Evasion and also Privilege Escalation.\n\n## Methodology\nIn 2025, Picus Labs analyzed 1,153,683 unique files. 1,084,718 of them (94%) were categorized as 'malicious'. 15,544,909 actions were extracted from these files, which means an average of 14 actions per malware.\n\n## Conclusion\nModern adversaries have largely abandoned noisy, smash-and-grab tactics in favor of operating as \"digital parasites,\" embedding themselves within trusted processes, abusing legitimate tools, and weaponizing identity and cloud infrastructure to remain undetected for extended periods.",
+          "position": 2
+        }
+      ]
+    },
+    "creditsUsed": 2,
+    "id": "01a01570-7094-7228-a6c4-3d4d2257cfed"
+  },
+  "search_mitigation": {
+    "success": true,
+    "data": {
+      "web": [
+        {
+          "url": "https://www.cyber.gc.ca/en/guidance/ransomware-playbook-itsm00099",
+          "title": "Ransomware playbook (ITSM.00.099) - Canadian Centre for Cyber Security",
+          "description": "Your strategy should include multiple layers of defence with several mitigation measures or security controls at each layer. Cyber defence ...",
+          "position": 1
+        },
+        {
+          "url": "https://www.cisa.gov/stopransomware/ransomware-guide",
+          "title": "#StopRansomware Guide | CISA",
+          "description": "# #StopRansomware Guide\n## **Part 1: Ransomware and Data Extortion Preparation, Prevention, and Mitigation Best Practices**\n### Preventing and Mitigating Ransomware and Data Extortion Incidents\n#### _**Initial Access Vector: Precursor Malware Infection**_\n- **Use automatic updates for your antivirus and anti-malware software and signatures.**Ensure tools are properly configured to escalate warnings and indicators to notify security personnel. The authoring organizations recommend using a centrally managed antivirus solution. This enables detection of both \u201cprecursor\u201d malware and ransomware.\n  - In some cases, ransomware deployment is the last step in a network compromise and is dropped to obscure previous post-compromise activities, such as business email compromise (BEC).\n- **Use application allowlisting and/or endpoint detection and response (EDR) solutions**on all assets to ensure that only authorized software is executable and all unauthorized software is blocked.\n  - For Windows, enable Windows Defender Application Control (WDAC), AppLocker, or both on all systems that support these features.\n    - WDAC is under continuous development while AppLocker will only receive security fixes. AppLocker can be used as a complement to WDAC, when WDAC is set to the most restrictive level possible, and AppLocker is used to fine-tune restrictions for your organization.\n  - Use allowlisting rather than attempting to list and deny every possible permutation of applications in a network environment.\n\n## General Best Practices and Hardening Guidance\n- **Apply the principle of least privilege to all systems and services** so that users only have the access they need to perform their jobs [ [CPG 2.E](https://www.cisa.gov/sites/default/files/2023-03/CISA_CPG_REPORT_v1.0.1_FINAL.pdf)]. Malicious actors often leverage privileged accounts for network-wide ransomware attacks.\n  - Make use of the Protected Users AD group in Windows domains to further secure privileged user accounts against [pass-the-hash attacks(link is external)](https://attack.mitre.org/techniques/T1550/002/).\n- **Mitigate the malicious use of remote access and remote monitoring and management (RMM)** software:\n  - Audit remote access tools on your network to identify current or authorized RMM software.\n  - Review logs for execution of RMM software to detect abnormal use, or RMM software running as a portable executable.\n  - Use security software to detect instances of RMM software only being loaded in memory.\n  - Require authorized RMM solutions only be used from within your network over approved remote access solutions, such as VPNs or virtual desktop interfaces (VDIs).\n  - Block both inbound and outbound connections on common RMM ports and protocols at the network perimeter.\n\n## **Part 2: Ransomware and Data Extortion Response Checklist**\n### Detection and Analysis\n- **Determine which systems were impacted, and immediately isolate them.**\n  - After an initial compromise, malicious actors may monitor your organization\u2019s activity or communications to understand if their actions have been detected. Isolate systems in a coordinated manner and use out-of-band communication methods such as phone calls to avoid tipping off actors that they have been discovered and that mitigation actions are being undertaken. Not doing so could cause actors to move laterally to preserve their access or deploy ransomware widely prior to networks being taken offline.",
+          "position": 2
+        }
+      ]
+    },
+    "creditsUsed": 2,
+    "id": "01a01570-77fe-778d-b1c8-f2686278f04d"
+  }
+}

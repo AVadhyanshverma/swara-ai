@@ -1,0 +1,22 @@
+import sys
+import json
+import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+from agent_dir.agent import chat_engine, agent_app
+
+cursor = chat_engine.conn.cursor()
+cursor.execute("SELECT thread_id FROM checkpoints ORDER BY checkpoint_id DESC LIMIT 1")
+row = cursor.fetchone()
+if row:
+    thread_id = row[0]
+    print(f"Latest thread_id: {thread_id}")
+    
+    state = agent_app.get_state({"configurable": {"thread_id": thread_id}})
+    messages = state.values.get("messages", [])
+    
+    for i, m in enumerate(messages[-5:]):  # print last 5 messages
+        print(f"Message {i} type: {type(m)}")
+        print(f"Content: {str(m.content)[:500]}")
+        print("---")
+else:
+    print("No threads found")

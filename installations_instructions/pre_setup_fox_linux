@@ -1,0 +1,12 @@
+Ubuntu/Debians: 
+
+sudo apt install python3-dev python3-venv \
+    libgirepository1.0-dev libcairo2-dev \
+    gir1.2-gtk-3.0 gir1.2-webkit2-4.1
+
+
+| Distro       | Install command                                        |
+| ------------ | ------------------------------------------------------ |
+| **Fedora**   | `sudo dnf install python3-gobject gtk3 webkit2gtk3`    |
+| **Arch**     | `sudo pacman -S python-gobject gtk3 webkit2gtk`        |
+| **openSUSE** | `sudo zypper install python3-gobject gtk3 webkit2gtk3` |
