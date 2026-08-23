@@ -4,7 +4,7 @@ from pathlib import Path
 
 # Set to True for development mode (local project paths)
 # Set to False for production mode (user home directory paths)
-DEV = True
+DEV = False
 
 def get_base_dir() -> Path:
     """Returns the base directory for the application."""
