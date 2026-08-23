@@ -181,19 +181,6 @@ python ui/main.py
 python chat_cli.py
 ```
 
-## Automated Releases via GitHub Actions
-
-Swara AI uses GitHub Actions to automatically build and publish release binaries whenever a new tag is pushed.
-
-### How to trigger a release:
-1. Ensure your code is pushed to `main`.
-2. Create and push a new Git tag (e.g., `v1.0.0`):
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
-3. The `.github/workflows/release.yml` action will trigger, build the Windows and Linux executables, and automatically create a GitHub Release with the binaries attached.
-
 ## Contribution Guidelines
 1. Fork the repository.
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`).
