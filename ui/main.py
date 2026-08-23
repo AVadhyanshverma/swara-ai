@@ -360,7 +360,7 @@ async def upload_file(file: UploadFile = File(...)):
         try:
             async with httpx.AsyncClient() as client:
                 files = {"file": (file.filename, file_bytes, file.content_type or "image/jpeg")}
-                resp = await client.post("http://127.0.0.1:8000/analyze", files=files, timeout=60.0)
+                resp = await client.post("https://adhyanshverma-data-gen.hf.space/analyze", files=files, timeout=60.0)
                 resp.raise_for_status()
                 data = resp.json()
                 return {"filename": file.filename, "content": data.get("result", "")}

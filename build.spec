@@ -16,7 +16,7 @@ a = Analysis(
         ('agent_dir', 'agent_dir'),
         ('tools', 'tools')
     ],
-    hiddenimports=['uvicorn', 'fastapi', 'langchain_openai', 'langchain_core', 'pydantic'],
+    hiddenimports=['uvicorn', 'fastapi', 'langchain_openai', 'langchain_core', 'pydantic', 'langgraph', 'firecrawl', 'httpx', 'typing_extensions', 'langchain', 'langchain_community', 'sqlite3'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
